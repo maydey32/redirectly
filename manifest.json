@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Redirectly",
+  "version": "1.0",
+  "description": "Simple URL redirect extension",
+  "permissions": [
+    "storage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+}

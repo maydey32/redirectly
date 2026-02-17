@@ -1,0 +1,101 @@
+body {
+  width: 340px;
+  padding: 16px;
+  background: #0f1117;
+  color: #e6edf3;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rules-container {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.rule-card {
+  background: #161b22;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #30363d;
+}
+
+.rule-title {
+  font-size: 13px;
+  word-break: break-all;
+  margin-bottom: 6px;
+}
+
+.rule-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #ff6b6b;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2f81f7;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #1f6feb;
+}
+
+.toggle {
+  width: 36px;
+  height: 20px;
+  appearance: none;
+  background: #30363d;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.toggle:checked {
+  background: #2f81f7;
+}
+
+.toggle::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.2s;
+}
+
+.toggle:checked::before {
+  transform: translateX(16px);
+}
