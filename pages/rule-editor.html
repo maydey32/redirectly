@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="rule-editor.css">
 </head>
+
 <body>
 
   <div class="container">
     <h2>Create Redirect Rule</h2>
 
-    <label>Match URL contains</label>
-    <input type="text" id="matchValue">
+    <label>Source Prefix</label>
+    <input type="text" id="matchValue" placeholder="tvid.in/player/4.0.4/">
 
-    <label>Redirect To</label>
-    <input type="text" id="redirectTo">
+    <label>Destination Prefix</label>
+    <input type="text" id="redirectTo" placeholder="https://tvid.in/player/stg/4.0.4/">
 
-    <button id="saveRule" class="primary-btn">
-      Save Rule
-    </button>
+    <button id="saveRule">Save Rule</button>
   </div>
 
   <script src="rule-editor.js"></script>
 </body>
+
 </html>

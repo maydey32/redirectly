@@ -1,25 +1,33 @@
-console.log("Rule Editor Loaded");
-
 document.addEventListener("DOMContentLoaded", () => {
   const saveBtn = document.getElementById("saveRule");
 
-  saveBtn.addEventListener("click", () => {
-    const matchValue = document.getElementById("matchValue").value.trim();
-    const redirectTo = document.getElementById("redirectTo").value.trim();
+  saveBtn.addEventListener("click", async () => {
+    const matchValue =
+      document.getElementById("matchValue").value.trim();
+
+    const redirectTo =
+      document.getElementById("redirectTo").value.trim();
 
     if (!matchValue || !redirectTo) {
-      alert("Both fields are required");
+      alert("Both fields are required.");
       return;
     }
 
-    chrome.runtime.sendMessage({
-      type: "ADD_RULE",
-      payload: {
-        matchValue,
-        redirectTo
-      }
-    });
+    try {
+      const response = await chrome.runtime.sendMessage({
+        type: "ADD_RULE",
+        payload: { matchValue, redirectTo }
+      });
 
-    alert("Rule Sent To Background");
+      if (response?.success) {
+        window.close();
+      } else {
+        alert("Background failed.");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save rule. Check console.");
+    }
   });
 });

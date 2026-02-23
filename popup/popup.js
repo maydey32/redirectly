@@ -1,26 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   const createBtn = document.getElementById("createRule");
 
-  if (createBtn) {
-    createBtn.addEventListener("click", () => {
-      chrome.tabs.create({
-        url: chrome.runtime.getURL("/pages/rule-editor.html")
-      });
+  createBtn.addEventListener("click", () => {
+    chrome.tabs.create({
+      url: chrome.runtime.getURL("pages/rule-editor.html")
     });
-  }
+  });
 
   loadRules();
 });
 
 async function loadRules() {
   const container = document.getElementById("rulesList");
+  const count = document.getElementById("ruleCount");
+
   const data = await chrome.storage.local.get("rules");
   const rules = data.rules || [];
 
   container.innerHTML = "";
-
-  document.getElementById("ruleCount").textContent =
-    `${rules.length} active`;
+  count.textContent = `${rules.length} active`;
 
   if (rules.length === 0) {
     container.innerHTML =
@@ -42,21 +40,25 @@ async function loadRules() {
       </div>
     `;
 
-    card.querySelector(".toggle").addEventListener("change", (e) => {
-      chrome.runtime.sendMessage({
-        type: "TOGGLE_RULE",
-        ruleId: rule.id,
-        enabled: e.target.checked
+    // DELETE
+    card.querySelector(".delete-btn")
+      .addEventListener("click", async () => {
+        await chrome.runtime.sendMessage({
+          type: "DELETE_RULE",
+          ruleId: rule.id
+        });
+        loadRules();
       });
-    });
 
-    card.querySelector(".delete-btn").addEventListener("click", () => {
-      chrome.runtime.sendMessage({
-        type: "DELETE_RULE",
-        ruleId: rule.id
+    // TOGGLE
+    card.querySelector(".toggle")
+      .addEventListener("change", async (e) => {
+        await chrome.runtime.sendMessage({
+          type: "TOGGLE_RULE",
+          ruleId: rule.id,
+          enabled: e.target.checked
+        });
       });
-      loadRules();
-    });
 
     container.appendChild(card);
   });
